@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="IRIS" version="26" zv="IRIS for UNIX (Red Hat Enterprise Linux for x86-64) 2020.1 (Build 215_0_20690U)" ts="2022-11-28 08:47:21">
+<Class name="DT.Triaje.SELA01ToTRIA01">
+<Super>Ens.DataTransformDTL</Super>
+<TimeChanged>66114,31676.59092275</TimeChanged>
+<TimeCreated>66058,62880.470626</TimeCreated>
+<DependsOn>EnsLib.HL7.Message</DependsOn>
+
+<Parameter name="IGNOREMISSINGSOURCE">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REPORTERRORS">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="TREATEMPTYREPEATINGFIELDASNULL">
+<Default>0</Default>
+</Parameter>
+
+<XData name="DTL">
+<XMLNamespace>http://www.intersystems.com/dtl</XMLNamespace>
+<Data><![CDATA[
+<transform sourceClass='EnsLib.HL7.Message' targetClass='EnsLib.HL7.Message' sourceDocType='SELENE-SP16_2.5:ADT_A01' targetDocType='Manchester_2.5:ADT_A01' create='new' language='objectscript' >
+</transform>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="DT.Triaje.SELA01ToTRIA04">
+<Super>Ens.DataTransformDTL</Super>
+<TimeChanged>66170,38209.054416</TimeChanged>
+<TimeCreated>66058,62997.279619</TimeCreated>
+<DependsOn>EnsLib.HL7.Message</DependsOn>
+
+<Parameter name="IGNOREMISSINGSOURCE">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REPORTERRORS">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="TREATEMPTYREPEATINGFIELDASNULL">
+<Default>0</Default>
+</Parameter>
+
+<XData name="DTL">
+<XMLNamespace>http://www.intersystems.com/dtl</XMLNamespace>
+<Data><![CDATA[
+<transform sourceClass='EnsLib.HL7.Message' targetClass='EnsLib.HL7.Message' sourceDocType='SELENE-SP16_2.5:ADT_A01' targetDocType='2.5:ADT_A01' create='new' language='objectscript' >
+<assign value='source.{MSH}' property='target.{MSH}' action='set' />
+<assign value='"A04"' property='target.{MSH:MessageType.TriggerEvent}' action='set' />
+<assign value='source.{EVN}' property='target.{EVN}' action='set' />
+<assign value='"A04"' property='target.{EVN:EventTypeCode}' action='set' />
+<group expanded='false' >
+<annotation>Mapeos PID</annotation>
+<assign value='source.{PID:SetIDPID}' property='target.{PID:SetIDPID}' action='set' />
+<assign value='source.{PID:PatientID}' property='target.{PID:PatientID}' action='set' />
+<foreach property='source.{PID:PatientIdentifierList()}' key='k1' >
+<if condition='source.{PID:PatientIdentifierList(k1).IdentifierTypeCode} = "PI"' >
+<true>
+<assign value='source.{PID:PatientIdentifierList(k1).IDNumber}' property='target.{PID:PatientIdentifierList(k1).IDNumber}' action='set' />
+</true>
+</if>
+</foreach>
+<assign value='source.{PID:AlternatePatientIDPID}' property='target.{PID:AlternatePatientIDPID(1)}' action='set' />
+<assign value='source.{PID:PatientName(1).GivenName}' property='target.{PID:PatientName(1).GivenName}' action='set' />
+<assign value='source.{PID:PatientName(1).FamilyName}' property='target.{PID:PatientName(1).FamilyName}' action='set' />
+<assign value='source.{PID:MothersMaidenName(1)}' property='target.{PID:PatientName(1).SecondandFurtherGivenNamesor}' action='set' />
+<assign value='source.{PID:DateTimeofBirth}' property='target.{PID:DateTimeofBirth}' action='set' />
+<assign value='source.{PID:AdministrativeSex}' property='target.{PID:AdministrativeSex}' action='set' />
+<assign value='source.{PID:PatientAlias}' property='target.{PID:PatientAlias()}' action='set' />
+<assign value='source.{PID:Race()}' property='target.{PID:Race()}' action='set' />
+<assign value='source.{PID:PatientAddress()}' property='target.{PID:PatientAddress()}' action='set' />
+<assign value='source.{PID:CountyCode}' property='target.{PID:CountyCode}' action='set' />
+<assign value='source.{PID:PhoneNumberHome()}' property='target.{PID:PhoneNumberHome()}' action='set' />
+<assign value='source.{PID:PhoneNumberBusiness()}' property='target.{PID:PhoneNumberBusiness()}' action='set' />
+<assign value='source.{PID:PrimaryLanguage}' property='target.{PID:PrimaryLanguage}' action='set' />
+<assign value='source.{PID:MaritalStatus}' property='target.{PID:MaritalStatus}' action='set' />
+<assign value='source.{PID:Religion}' property='target.{PID:Religion}' action='set' />
+<assign value='source.{PID:SSNNumberPatient}' property='target.{PID:SSNNumberPatient}' action='set' />
+<assign value='source.{PID:DriversLicenseNumberPatient}' property='target.{PID:DriversLicenseNumberPatient}' action='set' />
+<assign value='source.{PID:MothersIdentifier()}' property='target.{PID:MothersIdentifier()}' action='set' />
+<assign value='source.{PID:EthnicGroup()}' property='target.{PID:EthnicGroup()}' action='set' />
+<assign value='source.{PID:BirthPlace}' property='target.{PID:BirthPlace}' action='set' />
+<assign value='source.{PID:MultipleBirthIndicator}' property='target.{PID:MultipleBirthIndicator}' action='set' />
+<assign value='source.{PID:BirthOrder}' property='target.{PID:BirthOrder}' action='set' />
+<assign value='source.{PID:Citizenship()}' property='target.{PID:Citizenship()}' action='set' />
+<assign value='source.{PID:VeteransMilitaryStatus}' property='target.{PID:VeteransMilitaryStatus}' action='set' />
+<assign value='source.{PID:Nationality}' property='target.{PID:Nationality}' action='set' />
+<assign value='source.{PID:PatientDeathDateandTime}' property='target.{PID:PatientDeathDateandTime}' action='set' />
+<assign value='source.{PID:PatientDeathIndicator}' property='target.{PID:PatientDeathIndicator}' action='set' />
+</group>
+<group>
+<annotation>Mapeos PV1</annotation>
+<assign value='source.{PV1:VisitNumber.IdentifierTypeCode}' property='target.{PID:PatientAccountNumber}' action='set' />
+<assign value='source.{PV1:VisitNumber.IdentifierTypeCode}' property='target.{PV1:VisitNumber.IDNumber}' action='set' />
+<assign value='source.{PV1:SetIDPV1}' property='target.{PV1:SetIDPV1}' action='set' />
+<assign value='source.{PV1:PatientClass}' property='target.{PV1:PatientClass}' action='set' />
+<assign value='source.{PV1:AssignedPatientLocation}' property='target.{PV1:AssignedPatientLocation}' action='set' />
+<assign value='source.{PV1:AdmissionType}' property='target.{PV1:AdmissionType}' action='set' />
+<assign value='source.{PV1:PreadmitNumber}' property='target.{PV1:PreadmitNumber}' action='set' />
+<assign value='source.{PV1:PriorPatientLocation}' property='target.{PV1:PriorPatientLocation}' action='set' />
+<assign value='source.{PV1:AttendingDoctor()}' property='target.{PV1:AttendingDoctor()}' action='set' />
+<assign value='source.{PV1:ReferringDoctor()}' property='target.{PV1:ReferringDoctor()}' action='set' />
+<assign value='source.{PV1:ConsultingDoctor()}' property='target.{PV1:ConsultingDoctor()}' action='set' />
+<assign value='source.{PV1:HospitalService}' property='target.{PV1:HospitalService}' action='set' />
+<assign value='source.{PV1:TemporaryLocation}' property='target.{PV1:TemporaryLocation}' action='set' />
+<assign value='source.{PV1:PreadmitTestIndicator}' property='target.{PV1:PreadmitTestIndicator}' action='set' />
+<assign value='source.{PV1:ReadmissionIndicator}' property='target.{PV1:ReadmissionIndicator}' action='set' />
+<assign value='source.{PV1:AdmitSource}' property='target.{PV1:AdmitSource}' action='set' />
+<assign value='source.{PV1:AmbulatoryStatus()}' property='target.{PV1:AmbulatoryStatus()}' action='set' />
+<assign value='source.{PV1:VIPIndicator}' property='target.{PV1:VIPIndicator}' action='set' />
+<assign value='source.{PV1:AdmittingDoctor()}' property='target.{PV1:AdmittingDoctor()}' action='set' />
+<assign value='source.{PV1:PatientType}' property='target.{PV1:PatientType}' action='set' />
+<assign value='source.{PV1:FinancialClass()}' property='target.{PV1:FinancialClass()}' action='set' />
+<assign value='source.{PV1:ChargePriceIndicator}' property='target.{PV1:ChargePriceIndicator}' action='set' />
+<assign value='source.{PV1:CourtesyCode}' property='target.{PV1:CourtesyCode}' action='set' />
+<assign value='source.{PV1:CreditRating}' property='target.{PV1:CreditRating}' action='set' />
+<assign value='source.{PV1:ContractCode()}' property='target.{PV1:ContractCode()}' action='set' />
+<assign value='source.{PV1:ContractEffectiveDate()}' property='target.{PV1:ContractEffectiveDate()}' action='set' />
+<assign value='source.{PV1:ContractAmount()}' property='target.{PV1:ContractAmount()}' action='set' />
+<assign value='source.{PV1:ContractPeriod()}' property='target.{PV1:ContractPeriod()}' action='set' />
+<assign value='source.{PV1:InterestCode}' property='target.{PV1:InterestCode}' action='set' />
+<assign value='source.{PV1:TransfertoBadDebtCode}' property='target.{PV1:TransfertoBadDebtCode}' action='set' />
+<assign value='source.{PV1:TransfertoBadDebtDate}' property='target.{PV1:TransfertoBadDebtDate}' action='set' />
+<assign value='source.{PV1:BadDebtAgencyCode}' property='target.{PV1:BadDebtAgencyCode}' action='set' />
+<assign value='source.{PV1:BadDebtTransferAmount}' property='target.{PV1:BadDebtTransferAmount}' action='set' />
+<assign value='source.{PV1:BadDebtRecoveryAmount}' property='target.{PV1:BadDebtRecoveryAmount}' action='set' />
+<assign value='source.{PV1:DeleteAccountIndicator}' property='target.{PV1:DeleteAccountIndicator}' action='set' />
+<assign value='source.{PV1:DeleteAccountDate}' property='target.{PV1:DeleteAccountDate}' action='set' />
+<assign value='source.{PV1:DischargeDisposition}' property='target.{PV1:DischargeDisposition}' action='set' />
+<assign value='source.{PV1:DischargedtoLocation}' property='target.{PV1:DischargedtoLocation}' action='set' />
+<assign value='source.{PV1:DietType}' property='target.{PV1:DietType}' action='set' />
+<assign value='source.{PV1:ServicingFacility}' property='target.{PV1:ServicingFacility}' action='set' />
+<assign value='source.{PV1:BedStatus}' property='target.{PV1:BedStatus}' action='set' />
+<assign value='source.{PV1:AccountStatus}' property='target.{PV1:AccountStatus}' action='set' />
+<assign value='source.{PV1:PendingLocation}' property='target.{PV1:PendingLocation}' action='set' />
+<assign value='source.{PV1:PriorTemporaryLocation}' property='target.{PV1:PriorTemporaryLocation}' action='set' />
+<assign value='source.{PV1:AdmitDateTime}' property='target.{PV1:AdmitDateTime}' action='set' />
+<assign value='source.{PV1:DischargeDateTime()}' property='target.{PV1:DischargeDateTime()}' action='set' />
+<assign value='source.{PV1:CurrentPatientBalance}' property='target.{PV1:CurrentPatientBalance}' action='set' />
+<assign value='source.{PV1:TotalCharges}' property='target.{PV1:TotalCharges}' action='set' />
+<assign value='source.{PV1:TotalAdjustments}' property='target.{PV1:TotalAdjustments}' action='set' />
+<assign value='source.{PV1:TotalPayments}' property='target.{PV1:TotalPayments}' action='set' />
+<assign value='source.{PV1:AlternateVisitID}' property='target.{PV1:AlternateVisitID}' action='set' />
+<assign value='source.{PV1:VisitIndicator}' property='target.{PV1:VisitIndicator}' action='set' />
+<assign value='source.{PV1:OtherHealthcareProvider()}' property='target.{PV1:OtherHealthcareProvider()}' action='set' />
+</group>
+<assign value='source.{PV2}' property='target.{PV2}' action='set' />
+<assign value='source.{DG1()}' property='target.{DG1()}' action='set' />
+<assign value='source.{PR1()}' property='target.{PR1grp().PR1}' action='set' />
+<assign value='source.{GT1()}' property='target.{GT1()}' action='set' />
+<assign value='source.{IN1()}' property='target.{IN1grp().IN1}' action='set' />
+</transform>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="DT.Triaje.SELA03ToTRIA03">
+<Super>Ens.DataTransformDTL</Super>
+<TimeChanged>66170,38520.471873</TimeChanged>
+<TimeCreated>66087,43195.071042</TimeCreated>
+<DependsOn>EnsLib.HL7.Message</DependsOn>
+
+<Parameter name="IGNOREMISSINGSOURCE">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REPORTERRORS">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="TREATEMPTYREPEATINGFIELDASNULL">
+<Default>0</Default>
+</Parameter>
+
+<XData name="DTL">
+<XMLNamespace>http://www.intersystems.com/dtl</XMLNamespace>
+<Data><![CDATA[
+<transform sourceClass='EnsLib.HL7.Message' targetClass='EnsLib.HL7.Message' sourceDocType='SELENE-SP16_2.5:ADT_A03' targetDocType='Manchester_2.5:ADT_A03' create='new' language='objectscript' >
+<assign value='source.{MSH}' property='target.{MSH}' action='set' />
+<assign value='source.{EVN}' property='target.{EVN}' action='set' />
+<group expanded='false' >
+<annotation>Mapeos PID</annotation>
+<assign value='source.{PID:SetIDPID}' property='target.{PID:SetIDPID}' action='set' />
+<assign value='source.{PID:PatientID}' property='target.{PID:PatientID}' action='set' />
+<foreach property='source.{PID:PatientIdentifierList()}' key='k1' >
+<if condition='source.{PID:PatientIdentifierList(k1).IdentifierTypeCode} = "PI"' >
+<true>
+<assign value='source.{PID:PatientIdentifierList(k1).IDNumber}' property='target.{PID:PatientIdentifierList(k1).IDNumber}' action='set' />
+</true>
+</if>
+</foreach>
+<assign value='source.{PID:AlternatePatientIDPID}' property='target.{PID:AlternatePatientIDPID(1)}' action='set' />
+<assign value='source.{PID:PatientName(1).GivenName}' property='target.{PID:PatientName(1).GivenName}' action='set' />
+<assign value='source.{PID:PatientName(1).FamilyName}' property='target.{PID:PatientName(1).FamilyName}' action='set' />
+<assign value='source.{PID:MothersMaidenName(1)}' property='target.{PID:PatientName(1).SecondandFurtherGivenNamesor}' action='set' />
+<assign value='source.{PID:DateTimeofBirth}' property='target.{PID:DateTimeofBirth}' action='set' />
+<assign value='source.{PID:AdministrativeSex}' property='target.{PID:AdministrativeSex}' action='set' />
+<assign value='source.{PID:PatientAlias}' property='target.{PID:PatientAlias()}' action='set' />
+<assign value='source.{PID:Race()}' property='target.{PID:Race()}' action='set' />
+<assign value='source.{PID:PatientAddress()}' property='target.{PID:PatientAddress()}' action='set' />
+<assign value='source.{PID:CountyCode}' property='target.{PID:CountyCode}' action='set' />
+<assign value='source.{PID:PhoneNumberHome()}' property='target.{PID:PhoneNumberHome()}' action='set' />
+<assign value='source.{PID:PhoneNumberBusiness()}' property='target.{PID:PhoneNumberBusiness()}' action='set' />
+<assign value='source.{PID:PrimaryLanguage}' property='target.{PID:PrimaryLanguage}' action='set' />
+<assign value='source.{PID:MaritalStatus}' property='target.{PID:MaritalStatus}' action='set' />
+<assign value='source.{PID:Religion}' property='target.{PID:Religion}' action='set' />
+<assign value='source.{PID:SSNNumberPatient}' property='target.{PID:SSNNumberPatient}' action='set' />
+<assign value='source.{PID:DriversLicenseNumberPatient}' property='target.{PID:DriversLicenseNumberPatient}' action='set' />
+<assign value='source.{PID:MothersIdentifier()}' property='target.{PID:MothersIdentifier()}' action='set' />
+<assign value='source.{PID:EthnicGroup()}' property='target.{PID:EthnicGroup()}' action='set' />
+<assign value='source.{PID:BirthPlace}' property='target.{PID:BirthPlace}' action='set' />
+<assign value='source.{PID:MultipleBirthIndicator}' property='target.{PID:MultipleBirthIndicator}' action='set' />
+<assign value='source.{PID:BirthOrder}' property='target.{PID:BirthOrder}' action='set' />
+<assign value='source.{PID:Citizenship()}' property='target.{PID:Citizenship()}' action='set' />
+<assign value='source.{PID:VeteransMilitaryStatus}' property='target.{PID:VeteransMilitaryStatus}' action='set' />
+<assign value='source.{PID:Nationality}' property='target.{PID:Nationality}' action='set' />
+<assign value='source.{PID:PatientDeathDateandTime}' property='target.{PID:PatientDeathDateandTime}' action='set' />
+<assign value='source.{PID:PatientDeathIndicator}' property='target.{PID:PatientDeathIndicator}' action='set' />
+</group>
+<group>
+<annotation>Mapeos PV1</annotation>
+<assign value='source.{PV1:VisitNumber.IdentifierTypeCode}' property='target.{PID:PatientAccountNumber}' action='set' />
+<assign value='source.{PV1:VisitNumber.IdentifierTypeCode}' property='target.{PV1:VisitNumber.IDNumber}' action='set' />
+<assign value='source.{PV1:SetIDPV1}' property='target.{PV1:SetIDPV1}' action='set' />
+<assign value='source.{PV1:PatientClass}' property='target.{PV1:PatientClass}' action='set' />
+<assign value='source.{PV1:AssignedPatientLocation}' property='target.{PV1:AssignedPatientLocation}' action='set' />
+<assign value='source.{PV1:AdmissionType}' property='target.{PV1:AdmissionType}' action='set' />
+<assign value='source.{PV1:PreadmitNumber}' property='target.{PV1:PreadmitNumber}' action='set' />
+<assign value='source.{PV1:PriorPatientLocation}' property='target.{PV1:PriorPatientLocation}' action='set' />
+<assign value='source.{PV1:AttendingDoctor()}' property='target.{PV1:AttendingDoctor()}' action='set' />
+<assign value='source.{PV1:ReferringDoctor()}' property='target.{PV1:ReferringDoctor()}' action='set' />
+<assign value='source.{PV1:ConsultingDoctor()}' property='target.{PV1:ConsultingDoctor()}' action='set' />
+<assign value='source.{PV1:HospitalService}' property='target.{PV1:HospitalService}' action='set' />
+<assign value='source.{PV1:TemporaryLocation}' property='target.{PV1:TemporaryLocation}' action='set' />
+<assign value='source.{PV1:PreadmitTestIndicator}' property='target.{PV1:PreadmitTestIndicator}' action='set' />
+<assign value='source.{PV1:ReadmissionIndicator}' property='target.{PV1:ReadmissionIndicator}' action='set' />
+<assign value='source.{PV1:AdmitSource}' property='target.{PV1:AdmitSource}' action='set' />
+<assign value='source.{PV1:AmbulatoryStatus()}' property='target.{PV1:AmbulatoryStatus()}' action='set' />
+<assign value='source.{PV1:VIPIndicator}' property='target.{PV1:VIPIndicator}' action='set' />
+<assign value='source.{PV1:AdmittingDoctor()}' property='target.{PV1:AdmittingDoctor()}' action='set' />
+<assign value='source.{PV1:PatientType}' property='target.{PV1:PatientType}' action='set' />
+<assign value='source.{PV1:FinancialClass()}' property='target.{PV1:FinancialClass()}' action='set' />
+<assign value='source.{PV1:ChargePriceIndicator}' property='target.{PV1:ChargePriceIndicator}' action='set' />
+<assign value='source.{PV1:CourtesyCode}' property='target.{PV1:CourtesyCode}' action='set' />
+<assign value='source.{PV1:CreditRating}' property='target.{PV1:CreditRating}' action='set' />
+<assign value='source.{PV1:ContractCode()}' property='target.{PV1:ContractCode()}' action='set' />
+<assign value='source.{PV1:ContractEffectiveDate()}' property='target.{PV1:ContractEffectiveDate()}' action='set' />
+<assign value='source.{PV1:ContractAmount()}' property='target.{PV1:ContractAmount()}' action='set' />
+<assign value='source.{PV1:ContractPeriod()}' property='target.{PV1:ContractPeriod()}' action='set' />
+<assign value='source.{PV1:InterestCode}' property='target.{PV1:InterestCode}' action='set' />
+<assign value='source.{PV1:TransfertoBadDebtCode}' property='target.{PV1:TransfertoBadDebtCode}' action='set' />
+<assign value='source.{PV1:TransfertoBadDebtDate}' property='target.{PV1:TransfertoBadDebtDate}' action='set' />
+<assign value='source.{PV1:BadDebtAgencyCode}' property='target.{PV1:BadDebtAgencyCode}' action='set' />
+<assign value='source.{PV1:BadDebtTransferAmount}' property='target.{PV1:BadDebtTransferAmount}' action='set' />
+<assign value='source.{PV1:BadDebtRecoveryAmount}' property='target.{PV1:BadDebtRecoveryAmount}' action='set' />
+<assign value='source.{PV1:DeleteAccountIndicator}' property='target.{PV1:DeleteAccountIndicator}' action='set' />
+<assign value='source.{PV1:DeleteAccountDate}' property='target.{PV1:DeleteAccountDate}' action='set' />
+<assign value='source.{PV1:DischargeDisposition}' property='target.{PV1:DischargeDisposition}' action='set' />
+<assign value='source.{PV1:DischargedtoLocation}' property='target.{PV1:DischargedtoLocation}' action='set' />
+<assign value='source.{PV1:DietType}' property='target.{PV1:DietType}' action='set' />
+<assign value='source.{PV1:ServicingFacility}' property='target.{PV1:ServicingFacility}' action='set' />
+<assign value='source.{PV1:BedStatus}' property='target.{PV1:BedStatus}' action='set' />
+<assign value='source.{PV1:AccountStatus}' property='target.{PV1:AccountStatus}' action='set' />
+<assign value='source.{PV1:PendingLocation}' property='target.{PV1:PendingLocation}' action='set' />
+<assign value='source.{PV1:PriorTemporaryLocation}' property='target.{PV1:PriorTemporaryLocation}' action='set' />
+<assign value='source.{PV1:AdmitDateTime}' property='target.{PV1:AdmitDateTime}' action='set' />
+<assign value='source.{PV1:DischargeDateTime()}' property='target.{PV1:DischargeDateTime()}' action='set' />
+<assign value='source.{PV1:CurrentPatientBalance}' property='target.{PV1:CurrentPatientBalance}' action='set' />
+<assign value='source.{PV1:TotalCharges}' property='target.{PV1:TotalCharges}' action='set' />
+<assign value='source.{PV1:TotalAdjustments}' property='target.{PV1:TotalAdjustments}' action='set' />
+<assign value='source.{PV1:TotalPayments}' property='target.{PV1:TotalPayments}' action='set' />
+<assign value='source.{PV1:AlternateVisitID}' property='target.{PV1:AlternateVisitID}' action='set' />
+<assign value='source.{PV1:VisitIndicator}' property='target.{PV1:VisitIndicator}' action='set' />
+<assign value='source.{PV1:OtherHealthcareProvider()}' property='target.{PV1:OtherHealthcareProvider()}' action='set' />
+</group>
+<assign value='source.{PV2}' property='target.{PV2}' action='set' />
+<assign value='source.{PR1()}' property='target.{PR1grp().PR1}' action='set' />
+<assign value='source.{GT1()}' property='target.{GT1()}' action='set' />
+<assign value='source.{IN1()}' property='target.{IN1grp().IN1}' action='set' />
+</transform>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="DT.Triaje.SELA11ToTRIA11">
+<Super>Ens.DataTransformDTL</Super>
+<TimeChanged>66170,38542.100028</TimeChanged>
+<TimeCreated>66087,43324.734226</TimeCreated>
+<DependsOn>EnsLib.HL7.Message</DependsOn>
+
+<Parameter name="IGNOREMISSINGSOURCE">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REPORTERRORS">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="TREATEMPTYREPEATINGFIELDASNULL">
+<Default>0</Default>
+</Parameter>
+
+<XData name="DTL">
+<XMLNamespace>http://www.intersystems.com/dtl</XMLNamespace>
+<Data><![CDATA[
+<transform sourceClass='EnsLib.HL7.Message' targetClass='EnsLib.HL7.Message' sourceDocType='SELENE-SP16_2.5:ADT_A09' targetDocType='Manchester_2.5:ADT_A09' create='new' language='objectscript' >
+<assign value='source.{MSH}' property='target.{MSH}' action='set' />
+<assign value='source.{EVN}' property='target.{EVN}' action='set' />
+<group expanded='false' >
+<annotation>Mapeos PID</annotation>
+<assign value='source.{PID:SetIDPID}' property='target.{PID:SetIDPID}' action='set' />
+<assign value='source.{PID:PatientID}' property='target.{PID:PatientID}' action='set' />
+<foreach property='source.{PID:PatientIdentifierList()}' key='k1' >
+<if condition='source.{PID:PatientIdentifierList(k1).IdentifierTypeCode} = "PI"' >
+<true>
+<assign value='source.{PID:PatientIdentifierList(k1).IDNumber}' property='target.{PID:PatientIdentifierList(k1).IDNumber}' action='set' />
+</true>
+</if>
+</foreach>
+<assign value='source.{PID:AlternatePatientIDPID}' property='target.{PID:AlternatePatientIDPID(1)}' action='set' />
+<assign value='source.{PID:PatientName(1).GivenName}' property='target.{PID:PatientName(1).GivenName}' action='set' />
+<assign value='source.{PID:PatientName(1).FamilyName}' property='target.{PID:PatientName(1).FamilyName}' action='set' />
+<assign value='source.{PID:MothersMaidenName(1)}' property='target.{PID:PatientName(1).SecondandFurtherGivenNamesor}' action='set' />
+<assign value='source.{PID:DateTimeofBirth}' property='target.{PID:DateTimeofBirth}' action='set' />
+<assign value='source.{PID:AdministrativeSex}' property='target.{PID:AdministrativeSex}' action='set' />
+<assign value='source.{PID:PatientAlias}' property='target.{PID:PatientAlias()}' action='set' />
+<assign value='source.{PID:Race()}' property='target.{PID:Race()}' action='set' />
+<assign value='source.{PID:PatientAddress()}' property='target.{PID:PatientAddress()}' action='set' />
+<assign value='source.{PID:CountyCode}' property='target.{PID:CountyCode}' action='set' />
+<assign value='source.{PID:PhoneNumberHome()}' property='target.{PID:PhoneNumberHome()}' action='set' />
+<assign value='source.{PID:PhoneNumberBusiness()}' property='target.{PID:PhoneNumberBusiness()}' action='set' />
+<assign value='source.{PID:PrimaryLanguage}' property='target.{PID:PrimaryLanguage}' action='set' />
+<assign value='source.{PID:MaritalStatus}' property='target.{PID:MaritalStatus}' action='set' />
+<assign value='source.{PID:Religion}' property='target.{PID:Religion}' action='set' />
+<assign value='source.{PID:SSNNumberPatient}' property='target.{PID:SSNNumberPatient}' action='set' />
+<assign value='source.{PID:DriversLicenseNumberPatient}' property='target.{PID:DriversLicenseNumberPatient}' action='set' />
+<assign value='source.{PID:MothersIdentifier()}' property='target.{PID:MothersIdentifier()}' action='set' />
+<assign value='source.{PID:EthnicGroup()}' property='target.{PID:EthnicGroup()}' action='set' />
+<assign value='source.{PID:BirthPlace}' property='target.{PID:BirthPlace}' action='set' />
+<assign value='source.{PID:MultipleBirthIndicator}' property='target.{PID:MultipleBirthIndicator}' action='set' />
+<assign value='source.{PID:BirthOrder}' property='target.{PID:BirthOrder}' action='set' />
+<assign value='source.{PID:Citizenship()}' property='target.{PID:Citizenship()}' action='set' />
+<assign value='source.{PID:VeteransMilitaryStatus}' property='target.{PID:VeteransMilitaryStatus}' action='set' />
+<assign value='source.{PID:Nationality}' property='target.{PID:Nationality}' action='set' />
+<assign value='source.{PID:PatientDeathDateandTime}' property='target.{PID:PatientDeathDateandTime}' action='set' />
+<assign value='source.{PID:PatientDeathIndicator}' property='target.{PID:PatientDeathIndicator}' action='set' />
+</group>
+<group>
+<annotation>Mapeos PV1</annotation>
+<assign value='source.{PV1:VisitNumber.IdentifierTypeCode}' property='target.{PID:PatientAccountNumber}' action='set' />
+<assign value='source.{PV1:VisitNumber.IdentifierTypeCode}' property='target.{PV1:VisitNumber.IDNumber}' action='set' />
+<assign value='source.{PV1:SetIDPV1}' property='target.{PV1:SetIDPV1}' action='set' />
+<assign value='source.{PV1:PatientClass}' property='target.{PV1:PatientClass}' action='set' />
+<assign value='source.{PV1:AssignedPatientLocation}' property='target.{PV1:AssignedPatientLocation}' action='set' />
+<assign value='source.{PV1:AdmissionType}' property='target.{PV1:AdmissionType}' action='set' />
+<assign value='source.{PV1:PreadmitNumber}' property='target.{PV1:PreadmitNumber}' action='set' />
+<assign value='source.{PV1:PriorPatientLocation}' property='target.{PV1:PriorPatientLocation}' action='set' />
+<assign value='source.{PV1:AttendingDoctor()}' property='target.{PV1:AttendingDoctor()}' action='set' />
+<assign value='source.{PV1:ReferringDoctor()}' property='target.{PV1:ReferringDoctor()}' action='set' />
+<assign value='source.{PV1:ConsultingDoctor()}' property='target.{PV1:ConsultingDoctor()}' action='set' />
+<assign value='source.{PV1:HospitalService}' property='target.{PV1:HospitalService}' action='set' />
+<assign value='source.{PV1:TemporaryLocation}' property='target.{PV1:TemporaryLocation}' action='set' />
+<assign value='source.{PV1:PreadmitTestIndicator}' property='target.{PV1:PreadmitTestIndicator}' action='set' />
+<assign value='source.{PV1:ReadmissionIndicator}' property='target.{PV1:ReadmissionIndicator}' action='set' />
+<assign value='source.{PV1:AdmitSource}' property='target.{PV1:AdmitSource}' action='set' />
+<assign value='source.{PV1:AmbulatoryStatus()}' property='target.{PV1:AmbulatoryStatus()}' action='set' />
+<assign value='source.{PV1:VIPIndicator}' property='target.{PV1:VIPIndicator}' action='set' />
+<assign value='source.{PV1:AdmittingDoctor()}' property='target.{PV1:AdmittingDoctor()}' action='set' />
+<assign value='source.{PV1:PatientType}' property='target.{PV1:PatientType}' action='set' />
+<assign value='source.{PV1:FinancialClass()}' property='target.{PV1:FinancialClass()}' action='set' />
+<assign value='source.{PV1:ChargePriceIndicator}' property='target.{PV1:ChargePriceIndicator}' action='set' />
+<assign value='source.{PV1:CourtesyCode}' property='target.{PV1:CourtesyCode}' action='set' />
+<assign value='source.{PV1:CreditRating}' property='target.{PV1:CreditRating}' action='set' />
+<assign value='source.{PV1:ContractCode()}' property='target.{PV1:ContractCode()}' action='set' />
+<assign value='source.{PV1:ContractEffectiveDate()}' property='target.{PV1:ContractEffectiveDate()}' action='set' />
+<assign value='source.{PV1:ContractAmount()}' property='target.{PV1:ContractAmount()}' action='set' />
+<assign value='source.{PV1:ContractPeriod()}' property='target.{PV1:ContractPeriod()}' action='set' />
+<assign value='source.{PV1:InterestCode}' property='target.{PV1:InterestCode}' action='set' />
+<assign value='source.{PV1:TransfertoBadDebtCode}' property='target.{PV1:TransfertoBadDebtCode}' action='set' />
+<assign value='source.{PV1:TransfertoBadDebtDate}' property='target.{PV1:TransfertoBadDebtDate}' action='set' />
+<assign value='source.{PV1:BadDebtAgencyCode}' property='target.{PV1:BadDebtAgencyCode}' action='set' />
+<assign value='source.{PV1:BadDebtTransferAmount}' property='target.{PV1:BadDebtTransferAmount}' action='set' />
+<assign value='source.{PV1:BadDebtRecoveryAmount}' property='target.{PV1:BadDebtRecoveryAmount}' action='set' />
+<assign value='source.{PV1:DeleteAccountIndicator}' property='target.{PV1:DeleteAccountIndicator}' action='set' />
+<assign value='source.{PV1:DeleteAccountDate}' property='target.{PV1:DeleteAccountDate}' action='set' />
+<assign value='source.{PV1:DischargeDisposition}' property='target.{PV1:DischargeDisposition}' action='set' />
+<assign value='source.{PV1:DischargedtoLocation}' property='target.{PV1:DischargedtoLocation}' action='set' />
+<assign value='source.{PV1:DietType}' property='target.{PV1:DietType}' action='set' />
+<assign value='source.{PV1:ServicingFacility}' property='target.{PV1:ServicingFacility}' action='set' />
+<assign value='source.{PV1:BedStatus}' property='target.{PV1:BedStatus}' action='set' />
+<assign value='source.{PV1:AccountStatus}' property='target.{PV1:AccountStatus}' action='set' />
+<assign value='source.{PV1:PendingLocation}' property='target.{PV1:PendingLocation}' action='set' />
+<assign value='source.{PV1:PriorTemporaryLocation}' property='target.{PV1:PriorTemporaryLocation}' action='set' />
+<assign value='source.{PV1:AdmitDateTime}' property='target.{PV1:AdmitDateTime}' action='set' />
+<assign value='source.{PV1:DischargeDateTime()}' property='target.{PV1:DischargeDateTime()}' action='set' />
+<assign value='source.{PV1:CurrentPatientBalance}' property='target.{PV1:CurrentPatientBalance}' action='set' />
+<assign value='source.{PV1:TotalCharges}' property='target.{PV1:TotalCharges}' action='set' />
+<assign value='source.{PV1:TotalAdjustments}' property='target.{PV1:TotalAdjustments}' action='set' />
+<assign value='source.{PV1:TotalPayments}' property='target.{PV1:TotalPayments}' action='set' />
+<assign value='source.{PV1:AlternateVisitID}' property='target.{PV1:AlternateVisitID}' action='set' />
+<assign value='source.{PV1:VisitIndicator}' property='target.{PV1:VisitIndicator}' action='set' />
+<assign value='source.{PV1:OtherHealthcareProvider()}' property='target.{PV1:OtherHealthcareProvider()}' action='set' />
+</group>
+<assign value='source.{PV2}' property='target.{PV2}' action='set' />
+</transform>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="DT.Triaje.SELA13ToTRIA13">
+<Super>Ens.DataTransformDTL</Super>
+<TimeChanged>66170,38564.488559</TimeChanged>
+<TimeCreated>66087,44131.275931</TimeCreated>
+<DependsOn>EnsLib.HL7.Message</DependsOn>
+
+<Parameter name="IGNOREMISSINGSOURCE">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REPORTERRORS">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="TREATEMPTYREPEATINGFIELDASNULL">
+<Default>0</Default>
+</Parameter>
+
+<XData name="DTL">
+<XMLNamespace>http://www.intersystems.com/dtl</XMLNamespace>
+<Data><![CDATA[
+<transform sourceClass='EnsLib.HL7.Message' targetClass='EnsLib.HL7.Message' sourceDocType='SELENE-SP16_2.5:ADT_A01' targetDocType='Manchester_2.5:ADT_A01' create='new' language='objectscript' >
+<assign value='source.{MSH}' property='target.{MSH}' action='set' />
+<assign value='source.{EVN}' property='target.{EVN}' action='set' />
+<group>
+<annotation>Mapeos PID</annotation>
+<assign value='source.{PID:SetIDPID}' property='target.{PID:SetIDPID}' action='set' />
+<assign value='source.{PID:PatientID}' property='target.{PID:PatientID}' action='set' />
+<foreach property='source.{PID:PatientIdentifierList()}' key='k1' >
+<if condition='source.{PID:PatientIdentifierList(k1).IdentifierTypeCode} = "PI"' >
+<true>
+<assign value='source.{PID:PatientIdentifierList(k1).IDNumber}' property='target.{PID:PatientIdentifierList(k1).IDNumber}' action='set' />
+</true>
+</if>
+</foreach>
+<assign value='source.{PID:AlternatePatientIDPID}' property='target.{PID:AlternatePatientIDPID(1)}' action='set' />
+<assign value='source.{PID:PatientName(1).GivenName}' property='target.{PID:PatientName(1).GivenName}' action='set' />
+<assign value='source.{PID:PatientName(1).FamilyName}' property='target.{PID:PatientName(1).FamilyName}' action='set' />
+<assign value='source.{PID:MothersMaidenName(1)}' property='target.{PID:PatientName(1).SecondandFurtherGivenNamesor}' action='set' />
+<assign value='source.{PID:DateTimeofBirth}' property='target.{PID:DateTimeofBirth}' action='set' />
+<assign value='source.{PID:AdministrativeSex}' property='target.{PID:AdministrativeSex}' action='set' />
+<assign value='source.{PID:PatientAlias}' property='target.{PID:PatientAlias()}' action='set' />
+<assign value='source.{PID:Race()}' property='target.{PID:Race()}' action='set' />
+<assign value='source.{PID:PatientAddress()}' property='target.{PID:PatientAddress()}' action='set' />
+<assign value='source.{PID:CountyCode}' property='target.{PID:CountyCode}' action='set' />
+<assign value='source.{PID:PhoneNumberHome()}' property='target.{PID:PhoneNumberHome()}' action='set' />
+<assign value='source.{PID:PhoneNumberBusiness()}' property='target.{PID:PhoneNumberBusiness()}' action='set' />
+<assign value='source.{PID:PrimaryLanguage}' property='target.{PID:PrimaryLanguage}' action='set' />
+<assign value='source.{PID:MaritalStatus}' property='target.{PID:MaritalStatus}' action='set' />
+<assign value='source.{PID:Religion}' property='target.{PID:Religion}' action='set' />
+<assign value='source.{PID:SSNNumberPatient}' property='target.{PID:SSNNumberPatient}' action='set' />
+<assign value='source.{PID:DriversLicenseNumberPatient}' property='target.{PID:DriversLicenseNumberPatient}' action='set' />
+<assign value='source.{PID:MothersIdentifier()}' property='target.{PID:MothersIdentifier()}' action='set' />
+<assign value='source.{PID:EthnicGroup()}' property='target.{PID:EthnicGroup()}' action='set' />
+<assign value='source.{PID:BirthPlace}' property='target.{PID:BirthPlace}' action='set' />
+<assign value='source.{PID:MultipleBirthIndicator}' property='target.{PID:MultipleBirthIndicator}' action='set' />
+<assign value='source.{PID:BirthOrder}' property='target.{PID:BirthOrder}' action='set' />
+<assign value='source.{PID:Citizenship()}' property='target.{PID:Citizenship()}' action='set' />
+<assign value='source.{PID:VeteransMilitaryStatus}' property='target.{PID:VeteransMilitaryStatus}' action='set' />
+<assign value='source.{PID:Nationality}' property='target.{PID:Nationality}' action='set' />
+<assign value='source.{PID:PatientDeathDateandTime}' property='target.{PID:PatientDeathDateandTime}' action='set' />
+<assign value='source.{PID:PatientDeathIndicator}' property='target.{PID:PatientDeathIndicator}' action='set' />
+</group>
+<group>
+<annotation>Mapeos PV1</annotation>
+<assign value='source.{PV1:VisitNumber.IdentifierTypeCode}' property='target.{PID:PatientAccountNumber}' action='set' />
+<assign value='source.{PV1:VisitNumber.IdentifierTypeCode}' property='target.{PV1:VisitNumber.IDNumber}' action='set' />
+<assign value='source.{PV1:SetIDPV1}' property='target.{PV1:SetIDPV1}' action='set' />
+<assign value='source.{PV1:PatientClass}' property='target.{PV1:PatientClass}' action='set' />
+<assign value='source.{PV1:AssignedPatientLocation}' property='target.{PV1:AssignedPatientLocation}' action='set' />
+<assign value='source.{PV1:AdmissionType}' property='target.{PV1:AdmissionType}' action='set' />
+<assign value='source.{PV1:PreadmitNumber}' property='target.{PV1:PreadmitNumber}' action='set' />
+<assign value='source.{PV1:PriorPatientLocation}' property='target.{PV1:PriorPatientLocation}' action='set' />
+<assign value='source.{PV1:AttendingDoctor()}' property='target.{PV1:AttendingDoctor()}' action='set' />
+<assign value='source.{PV1:ReferringDoctor()}' property='target.{PV1:ReferringDoctor()}' action='set' />
+<assign value='source.{PV1:ConsultingDoctor()}' property='target.{PV1:ConsultingDoctor()}' action='set' />
+<assign value='source.{PV1:HospitalService}' property='target.{PV1:HospitalService}' action='set' />
+<assign value='source.{PV1:TemporaryLocation}' property='target.{PV1:TemporaryLocation}' action='set' />
+<assign value='source.{PV1:PreadmitTestIndicator}' property='target.{PV1:PreadmitTestIndicator}' action='set' />
+<assign value='source.{PV1:ReadmissionIndicator}' property='target.{PV1:ReadmissionIndicator}' action='set' />
+<assign value='source.{PV1:AdmitSource}' property='target.{PV1:AdmitSource}' action='set' />
+<assign value='source.{PV1:AmbulatoryStatus()}' property='target.{PV1:AmbulatoryStatus()}' action='set' />
+<assign value='source.{PV1:VIPIndicator}' property='target.{PV1:VIPIndicator}' action='set' />
+<assign value='source.{PV1:AdmittingDoctor()}' property='target.{PV1:AdmittingDoctor()}' action='set' />
+<assign value='source.{PV1:PatientType}' property='target.{PV1:PatientType}' action='set' />
+<assign value='source.{PV1:FinancialClass()}' property='target.{PV1:FinancialClass()}' action='set' />
+<assign value='source.{PV1:ChargePriceIndicator}' property='target.{PV1:ChargePriceIndicator}' action='set' />
+<assign value='source.{PV1:CourtesyCode}' property='target.{PV1:CourtesyCode}' action='set' />
+<assign value='source.{PV1:CreditRating}' property='target.{PV1:CreditRating}' action='set' />
+<assign value='source.{PV1:ContractCode()}' property='target.{PV1:ContractCode()}' action='set' />
+<assign value='source.{PV1:ContractEffectiveDate()}' property='target.{PV1:ContractEffectiveDate()}' action='set' />
+<assign value='source.{PV1:ContractAmount()}' property='target.{PV1:ContractAmount()}' action='set' />
+<assign value='source.{PV1:ContractPeriod()}' property='target.{PV1:ContractPeriod()}' action='set' />
+<assign value='source.{PV1:InterestCode}' property='target.{PV1:InterestCode}' action='set' />
+<assign value='source.{PV1:TransfertoBadDebtCode}' property='target.{PV1:TransfertoBadDebtCode}' action='set' />
+<assign value='source.{PV1:TransfertoBadDebtDate}' property='target.{PV1:TransfertoBadDebtDate}' action='set' />
+<assign value='source.{PV1:BadDebtAgencyCode}' property='target.{PV1:BadDebtAgencyCode}' action='set' />
+<assign value='source.{PV1:BadDebtTransferAmount}' property='target.{PV1:BadDebtTransferAmount}' action='set' />
+<assign value='source.{PV1:BadDebtRecoveryAmount}' property='target.{PV1:BadDebtRecoveryAmount}' action='set' />
+<assign value='source.{PV1:DeleteAccountIndicator}' property='target.{PV1:DeleteAccountIndicator}' action='set' />
+<assign value='source.{PV1:DeleteAccountDate}' property='target.{PV1:DeleteAccountDate}' action='set' />
+<assign value='source.{PV1:DischargeDisposition}' property='target.{PV1:DischargeDisposition}' action='set' />
+<assign value='source.{PV1:DischargedtoLocation}' property='target.{PV1:DischargedtoLocation}' action='set' />
+<assign value='source.{PV1:DietType}' property='target.{PV1:DietType}' action='set' />
+<assign value='source.{PV1:ServicingFacility}' property='target.{PV1:ServicingFacility}' action='set' />
+<assign value='source.{PV1:BedStatus}' property='target.{PV1:BedStatus}' action='set' />
+<assign value='source.{PV1:AccountStatus}' property='target.{PV1:AccountStatus}' action='set' />
+<assign value='source.{PV1:PendingLocation}' property='target.{PV1:PendingLocation}' action='set' />
+<assign value='source.{PV1:PriorTemporaryLocation}' property='target.{PV1:PriorTemporaryLocation}' action='set' />
+<assign value='source.{PV1:AdmitDateTime}' property='target.{PV1:AdmitDateTime}' action='set' />
+<assign value='source.{PV1:DischargeDateTime()}' property='target.{PV1:DischargeDateTime()}' action='set' />
+<assign value='source.{PV1:CurrentPatientBalance}' property='target.{PV1:CurrentPatientBalance}' action='set' />
+<assign value='source.{PV1:TotalCharges}' property='target.{PV1:TotalCharges}' action='set' />
+<assign value='source.{PV1:TotalAdjustments}' property='target.{PV1:TotalAdjustments}' action='set' />
+<assign value='source.{PV1:TotalPayments}' property='target.{PV1:TotalPayments}' action='set' />
+<assign value='source.{PV1:AlternateVisitID}' property='target.{PV1:AlternateVisitID}' action='set' />
+<assign value='source.{PV1:VisitIndicator}' property='target.{PV1:VisitIndicator}' action='set' />
+<assign value='source.{PV1:OtherHealthcareProvider()}' property='target.{PV1:OtherHealthcareProvider()}' action='set' />
+</group>
+<assign value='source.{PV2}' property='target.{PV2}' action='set' />
+<assign value='source.{DG1()}' property='target.{DG1()}' action='set' />
+<assign value='source.{PR1()}' property='target.{PR1grp().PR1}' action='set' />
+<assign value='source.{GT1()}' property='target.{GT1()}' action='set' />
+<assign value='source.{IN1()}' property='target.{IN1grp().IN1}' action='set' />
+</transform>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="DT.Triaje.SELA31ToTRIA31">
+<Super>Ens.DataTransformDTL</Super>
+<TimeChanged>66170,38598.175463</TimeChanged>
+<TimeCreated>66091,43283.127016</TimeCreated>
+<DependsOn>EnsLib.HL7.Message</DependsOn>
+
+<Parameter name="IGNOREMISSINGSOURCE">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REPORTERRORS">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="TREATEMPTYREPEATINGFIELDASNULL">
+<Default>0</Default>
+</Parameter>
+
+<XData name="DTL">
+<XMLNamespace>http://www.intersystems.com/dtl</XMLNamespace>
+<Data><![CDATA[
+<transform sourceClass='EnsLib.HL7.Message' targetClass='EnsLib.HL7.Message' sourceDocType='SELENE-SP16_2.5:ADT_A05' targetDocType='Manchester_2.5:ADT_A05' create='new' language='objectscript' >
+<assign value='source.{MSH}' property='target.{MSH}' action='set' />
+<assign value='source.{EVN}' property='target.{EVN}' action='set' />
+<group>
+<annotation>Mapeos PID</annotation>
+<assign value='source.{PID:SetIDPID}' property='target.{PID:SetIDPID}' action='set' />
+<assign value='source.{PID:PatientID}' property='target.{PID:PatientID}' action='set' />
+<foreach property='source.{PID:PatientIdentifierList()}' key='k1' >
+<if condition='source.{PID:PatientIdentifierList(k1).IdentifierTypeCode} = "PI"' >
+<true>
+<assign value='source.{PID:PatientIdentifierList(k1).IDNumber}' property='target.{PID:PatientIdentifierList(k1).IDNumber}' action='set' />
+</true>
+</if>
+</foreach>
+<assign value='source.{PID:AlternatePatientIDPID}' property='target.{PID:AlternatePatientIDPID(1)}' action='set' />
+<assign value='source.{PID:PatientName(1).GivenName}' property='target.{PID:PatientName(1).GivenName}' action='set' />
+<assign value='source.{PID:PatientName(1).FamilyName}' property='target.{PID:PatientName(1).FamilyName}' action='set' />
+<assign value='source.{PID:MothersMaidenName(1)}' property='target.{PID:PatientName(1).SecondandFurtherGivenNamesor}' action='set' />
+<assign value='source.{PID:DateTimeofBirth}' property='target.{PID:DateTimeofBirth}' action='set' />
+<assign value='source.{PID:AdministrativeSex}' property='target.{PID:AdministrativeSex}' action='set' />
+<assign value='source.{PID:PatientAlias}' property='target.{PID:PatientAlias()}' action='set' />
+<assign value='source.{PID:Race()}' property='target.{PID:Race()}' action='set' />
+<assign value='source.{PID:PatientAddress()}' property='target.{PID:PatientAddress()}' action='set' />
+<assign value='source.{PID:CountyCode}' property='target.{PID:CountyCode}' action='set' />
+<assign value='source.{PID:PhoneNumberHome()}' property='target.{PID:PhoneNumberHome()}' action='set' />
+<assign value='source.{PID:PhoneNumberBusiness()}' property='target.{PID:PhoneNumberBusiness()}' action='set' />
+<assign value='source.{PID:PrimaryLanguage}' property='target.{PID:PrimaryLanguage}' action='set' />
+<assign value='source.{PID:MaritalStatus}' property='target.{PID:MaritalStatus}' action='set' />
+<assign value='source.{PID:Religion}' property='target.{PID:Religion}' action='set' />
+<assign value='source.{PID:SSNNumberPatient}' property='target.{PID:SSNNumberPatient}' action='set' />
+<assign value='source.{PID:DriversLicenseNumberPatient}' property='target.{PID:DriversLicenseNumberPatient}' action='set' />
+<assign value='source.{PID:MothersIdentifier()}' property='target.{PID:MothersIdentifier()}' action='set' />
+<assign value='source.{PID:EthnicGroup()}' property='target.{PID:EthnicGroup()}' action='set' />
+<assign value='source.{PID:BirthPlace}' property='target.{PID:BirthPlace}' action='set' />
+<assign value='source.{PID:MultipleBirthIndicator}' property='target.{PID:MultipleBirthIndicator}' action='set' />
+<assign value='source.{PID:BirthOrder}' property='target.{PID:BirthOrder}' action='set' />
+<assign value='source.{PID:Citizenship()}' property='target.{PID:Citizenship()}' action='set' />
+<assign value='source.{PID:VeteransMilitaryStatus}' property='target.{PID:VeteransMilitaryStatus}' action='set' />
+<assign value='source.{PID:Nationality}' property='target.{PID:Nationality}' action='set' />
+<assign value='source.{PID:PatientDeathDateandTime}' property='target.{PID:PatientDeathDateandTime}' action='set' />
+<assign value='source.{PID:PatientDeathIndicator}' property='target.{PID:PatientDeathIndicator}' action='set' />
+</group>
+<group>
+<annotation>Mapeos PV1</annotation>
+<assign value='source.{PV1:VisitNumber.IdentifierTypeCode}' property='target.{PID:PatientAccountNumber}' action='set' />
+<assign value='source.{PV1:VisitNumber.IdentifierTypeCode}' property='target.{PV1:VisitNumber.IDNumber}' action='set' />
+<assign value='source.{PV1:SetIDPV1}' property='target.{PV1:SetIDPV1}' action='set' />
+<assign value='source.{PV1:PatientClass}' property='target.{PV1:PatientClass}' action='set' />
+<assign value='source.{PV1:AssignedPatientLocation}' property='target.{PV1:AssignedPatientLocation}' action='set' />
+<assign value='source.{PV1:AdmissionType}' property='target.{PV1:AdmissionType}' action='set' />
+<assign value='source.{PV1:PreadmitNumber}' property='target.{PV1:PreadmitNumber}' action='set' />
+<assign value='source.{PV1:PriorPatientLocation}' property='target.{PV1:PriorPatientLocation}' action='set' />
+<assign value='source.{PV1:AttendingDoctor()}' property='target.{PV1:AttendingDoctor()}' action='set' />
+<assign value='source.{PV1:ReferringDoctor()}' property='target.{PV1:ReferringDoctor()}' action='set' />
+<assign value='source.{PV1:ConsultingDoctor()}' property='target.{PV1:ConsultingDoctor()}' action='set' />
+<assign value='source.{PV1:HospitalService}' property='target.{PV1:HospitalService}' action='set' />
+<assign value='source.{PV1:TemporaryLocation}' property='target.{PV1:TemporaryLocation}' action='set' />
+<assign value='source.{PV1:PreadmitTestIndicator}' property='target.{PV1:PreadmitTestIndicator}' action='set' />
+<assign value='source.{PV1:ReadmissionIndicator}' property='target.{PV1:ReadmissionIndicator}' action='set' />
+<assign value='source.{PV1:AdmitSource}' property='target.{PV1:AdmitSource}' action='set' />
+<assign value='source.{PV1:AmbulatoryStatus()}' property='target.{PV1:AmbulatoryStatus()}' action='set' />
+<assign value='source.{PV1:VIPIndicator}' property='target.{PV1:VIPIndicator}' action='set' />
+<assign value='source.{PV1:AdmittingDoctor()}' property='target.{PV1:AdmittingDoctor()}' action='set' />
+<assign value='source.{PV1:PatientType}' property='target.{PV1:PatientType}' action='set' />
+<assign value='source.{PV1:FinancialClass()}' property='target.{PV1:FinancialClass()}' action='set' />
+<assign value='source.{PV1:ChargePriceIndicator}' property='target.{PV1:ChargePriceIndicator}' action='set' />
+<assign value='source.{PV1:CourtesyCode}' property='target.{PV1:CourtesyCode}' action='set' />
+<assign value='source.{PV1:CreditRating}' property='target.{PV1:CreditRating}' action='set' />
+<assign value='source.{PV1:ContractCode()}' property='target.{PV1:ContractCode()}' action='set' />
+<assign value='source.{PV1:ContractEffectiveDate()}' property='target.{PV1:ContractEffectiveDate()}' action='set' />
+<assign value='source.{PV1:ContractAmount()}' property='target.{PV1:ContractAmount()}' action='set' />
+<assign value='source.{PV1:ContractPeriod()}' property='target.{PV1:ContractPeriod()}' action='set' />
+<assign value='source.{PV1:InterestCode}' property='target.{PV1:InterestCode}' action='set' />
+<assign value='source.{PV1:TransfertoBadDebtCode}' property='target.{PV1:TransfertoBadDebtCode}' action='set' />
+<assign value='source.{PV1:TransfertoBadDebtDate}' property='target.{PV1:TransfertoBadDebtDate}' action='set' />
+<assign value='source.{PV1:BadDebtAgencyCode}' property='target.{PV1:BadDebtAgencyCode}' action='set' />
+<assign value='source.{PV1:BadDebtTransferAmount}' property='target.{PV1:BadDebtTransferAmount}' action='set' />
+<assign value='source.{PV1:BadDebtRecoveryAmount}' property='target.{PV1:BadDebtRecoveryAmount}' action='set' />
+<assign value='source.{PV1:DeleteAccountIndicator}' property='target.{PV1:DeleteAccountIndicator}' action='set' />
+<assign value='source.{PV1:DeleteAccountDate}' property='target.{PV1:DeleteAccountDate}' action='set' />
+<assign value='source.{PV1:DischargeDisposition}' property='target.{PV1:DischargeDisposition}' action='set' />
+<assign value='source.{PV1:DischargedtoLocation}' property='target.{PV1:DischargedtoLocation}' action='set' />
+<assign value='source.{PV1:DietType}' property='target.{PV1:DietType}' action='set' />
+<assign value='source.{PV1:ServicingFacility}' property='target.{PV1:ServicingFacility}' action='set' />
+<assign value='source.{PV1:BedStatus}' property='target.{PV1:BedStatus}' action='set' />
+<assign value='source.{PV1:AccountStatus}' property='target.{PV1:AccountStatus}' action='set' />
+<assign value='source.{PV1:PendingLocation}' property='target.{PV1:PendingLocation}' action='set' />
+<assign value='source.{PV1:PriorTemporaryLocation}' property='target.{PV1:PriorTemporaryLocation}' action='set' />
+<assign value='source.{PV1:AdmitDateTime}' property='target.{PV1:AdmitDateTime}' action='set' />
+<assign value='source.{PV1:DischargeDateTime()}' property='target.{PV1:DischargeDateTime()}' action='set' />
+<assign value='source.{PV1:CurrentPatientBalance}' property='target.{PV1:CurrentPatientBalance}' action='set' />
+<assign value='source.{PV1:TotalCharges}' property='target.{PV1:TotalCharges}' action='set' />
+<assign value='source.{PV1:TotalAdjustments}' property='target.{PV1:TotalAdjustments}' action='set' />
+<assign value='source.{PV1:TotalPayments}' property='target.{PV1:TotalPayments}' action='set' />
+<assign value='source.{PV1:AlternateVisitID}' property='target.{PV1:AlternateVisitID}' action='set' />
+<assign value='source.{PV1:VisitIndicator}' property='target.{PV1:VisitIndicator}' action='set' />
+<assign value='source.{PV1:OtherHealthcareProvider()}' property='target.{PV1:OtherHealthcareProvider()}' action='set' />
+</group>
+<assign value='source.{PV2}' property='target.{PV2}' action='set' />
+</transform>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="DT.Triaje.SELA34ToTRIA40">
+<Super>Ens.DataTransformDTL</Super>
+<TimeChanged>66114,31676.59092275</TimeChanged>
+<TimeCreated>66091,43520.347621</TimeCreated>
+<DependsOn>EnsLib.HL7.Message</DependsOn>
+
+<Parameter name="IGNOREMISSINGSOURCE">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REPORTERRORS">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="TREATEMPTYREPEATINGFIELDASNULL">
+<Default>0</Default>
+</Parameter>
+
+<XData name="DTL">
+<XMLNamespace>http://www.intersystems.com/dtl</XMLNamespace>
+<Data><![CDATA[
+<transform sourceClass='EnsLib.HL7.Message' targetClass='EnsLib.HL7.Message' sourceDocType='SELENE-SP16_2.5:ADT_A30' targetDocType='Manchester_2.5:ADT_A39' create='new' language='objectscript' >
+<assign value='source.{MSH}' property='target.{MSH}' action='set' />
+<assign value='"A40"' property='target.{MSH:MessageType.TriggerEvent}' action='set' />
+<assign value='source.{EVN}' property='target.{EVN}' action='set' />
+<assign value='"A40"' property='target.{EVN:EventTypeCode}' action='set' />
+<group expanded='false' >
+<annotation>Mapeos PID</annotation>
+<assign value='source.{PID:SetIDPID}' property='target.{PIDgrp(1).PID:SetIDPID}' action='set' />
+<assign value='source.{PID:PatientID}' property='target.{PIDgrp(1).PID:PatientID}' action='set' />
+<foreach property='source.{PID:PatientIdentifierList()}' key='k1' >
+<if condition='source.{PID:PatientIdentifierList(k1).IdentifierTypeCode} = "PI"' >
+<true>
+<assign value='source.{PID:PatientIdentifierList(k1).IDNumber}' property='target.{PIDgrp(1).PID:PatientIdentifierList(k1).IDNumber}' action='set' />
+</true>
+</if>
+</foreach>
+<assign value='source.{PID:AlternatePatientIDPID}' property='target.{PIDgrp(1).PID:AlternatePatientIDPID(1)}' action='set' />
+<assign value='source.{PID:PatientName(1).GivenName}' property='target.{PIDgrp(1).PID:PatientName(1).GivenName}' action='set' />
+<assign value='source.{PID:PatientName(1).FamilyName}' property='target.{PIDgrp(1).PID:PatientName(1).FamilyName}' action='set' />
+<assign value='source.{PID:MothersMaidenName(1)}' property='target.{PIDgrp(1).PID:PatientName(1).SecondandFurtherGivenNamesor}' action='set' />
+<assign value='source.{PID:DateTimeofBirth}' property='target.{PIDgrp(1).PID:DateTimeofBirth}' action='set' />
+<assign value='source.{PID:AdministrativeSex}' property='target.{PIDgrp(1).PID:AdministrativeSex}' action='set' />
+<assign value='source.{PID:PatientAlias}' property='target.{PIDgrp(1).PID:PatientAlias()}' action='set' />
+<assign value='source.{PID:Race()}' property='target.{PIDgrp(1).PID:Race()}' action='set' />
+<assign value='source.{PID:PatientAddress()}' property='target.{PIDgrp(1).PID:PatientAddress()}' action='set' />
+<assign value='source.{PID:CountyCode}' property='target.{PIDgrp(1).PID:CountyCode}' action='set' />
+<assign value='source.{PID:PhoneNumberHome()}' property='target.{PIDgrp(1).PID:PhoneNumberHome()}' action='set' />
+<assign value='source.{PID:PhoneNumberBusiness()}' property='target.{PIDgrp(1).PID:PhoneNumberBusiness()}' action='set' />
+<assign value='source.{PID:PrimaryLanguage}' property='target.{PIDgrp(1).PID:PrimaryLanguage}' action='set' />
+<assign value='source.{PID:MaritalStatus}' property='target.{PIDgrp(1).PID:MaritalStatus}' action='set' />
+<assign value='source.{PID:Religion}' property='target.{PIDgrp(1).PID:Religion}' action='set' />
+<assign value='source.{PID:SSNNumberPatient}' property='target.{PIDgrp(1).PID:SSNNumberPatient}' action='set' />
+<assign value='source.{PID:DriversLicenseNumberPatient}' property='target.{PIDgrp(1).PID:DriversLicenseNumberPatient}' action='set' />
+<assign value='source.{PID:MothersIdentifier()}' property='target.{PIDgrp(1).PID:MothersIdentifier()}' action='set' />
+<assign value='source.{PID:EthnicGroup()}' property='target.{PIDgrp(1).PID:EthnicGroup()}' action='set' />
+<assign value='source.{PID:BirthPlace}' property='target.{PIDgrp(1).PID:BirthPlace}' action='set' />
+<assign value='source.{PID:MultipleBirthIndicator}' property='target.{PIDgrp(1).PID:MultipleBirthIndicator}' action='set' />
+<assign value='source.{PID:BirthOrder}' property='target.{PIDgrp(1).PID:BirthOrder}' action='set' />
+<assign value='source.{PID:Citizenship()}' property='target.{PIDgrp(1).PID:Citizenship()}' action='set' />
+<assign value='source.{PID:VeteransMilitaryStatus}' property='target.{PIDgrp(1).PID:VeteransMilitaryStatus}' action='set' />
+<assign value='source.{PID:Nationality}' property='target.{PIDgrp(1).PID:Nationality}' action='set' />
+<assign value='source.{PID:PatientDeathDateandTime}' property='target.{PIDgrp(1).PID:PatientDeathDateandTime}' action='set' />
+<assign value='source.{PID:PatientDeathIndicator}' property='target.{PIDgrp(1).PID:PatientDeathIndicator}' action='set' />
+</group>
+<assign value='source.{MRG}' property='target.{PIDgrp(1).MRG}' action='set' />
+</transform>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="DT.Triaje.TRIA02ToSELA02">
+<Super>Ens.DataTransformDTL</Super>
+<TimeChanged>66403,59488.912944</TimeChanged>
+<TimeCreated>66330,41380.572755</TimeCreated>
+<DependsOn>EnsLib.HL7.Message</DependsOn>
+
+<Parameter name="IGNOREMISSINGSOURCE">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REPORTERRORS">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="TREATEMPTYREPEATINGFIELDASNULL">
+<Default>0</Default>
+</Parameter>
+
+<XData name="DTL">
+<XMLNamespace>http://www.intersystems.com/dtl</XMLNamespace>
+<Data><![CDATA[
+<transform sourceClass='EnsLib.HL7.Message' targetClass='EnsLib.HL7.Message' sourceDocType='Manchester_2.5:ADT_A02' targetDocType='SELENE-SP16_2.5:ADT_A02' create='new' language='objectscript' >
+<assign value='"^~\&amp;"' property='target.{MSH:EncodingCharacters}' action='set' />
+<assign value='"|"' property='target.{MSH:FieldSeparator}' action='set' />
+<assign value='"TRASLADO_EXT"' property='target.{MSH:SendingApplication}' action='set' />
+<assign value='"HCSC"' property='target.{MSH:SendingFacility}' action='set' />
+<assign value='"EXTERNAL"' property='target.{MSH:ReceivingApplication}' action='set' />
+<assign value='"EXTHL7"' property='target.{MSH:ReceivingFacility}' action='set' />
+<assign value='source.{MSH:DateTimeOfMessage}' property='target.{MSH:DateTimeOfMessage}' action='set' />
+<assign value='"HUP"' property='target.{MSH:Security}' action='set' />
+<assign value='"ADT_A02"' property='target.{MSH:MessageType.MessageStructure}' action='set' />
+<assign value='"ADT"' property='target.{MSH:MessageType.MessageCode}' action='set' />
+<assign value='"A02"' property='target.{MSH:MessageType.TriggerEvent}' action='set' />
+<assign value='"P"' property='target.{MSH:ProcessingID}' action='set' />
+<assign value='"2.5"' property='target.{MSH:VersionID}' action='set' />
+<assign value='"1"' property='target.{MSH:SequenceNumber}' action='set' />
+<assign value='"AL"' property='target.{MSH:AcceptAcknowledgmentType}' action='set' />
+<assign value='"AL"' property='target.{MSH:ApplicationAcknowledgmentTyp}' action='set' />
+<assign value='"ASCII"' property='target.{MSH:CharacterSet(1)}' action='set' />
+<assign value='"A02"' property='target.{EVN:EventTypeCode}' action='set' />
+<assign value='source.{EVN:RecordedDateTime}' property='target.{EVN:RecordedDateTime}' action='set' />
+<assign value='"1"' property='target.{PID:SetIDPID}' action='set' />
+<assign value='source.{PID:PatientIdentifierList()}' property='target.{PID:PatientIdentifierList()}' action='set' />
+<assign value='"1"' property='target.{PV1:SetIDPV1}' action='set' />
+<assign value='source.{PV1:PatientClass}' property='target.{PV1:PatientClass}' action='set' />
+<assign value='source.{PV1:AssignedPatientLocation.Room}' property='target.{PV1:AssignedPatientLocation.Bed}' action='set' />
+<if condition='source.{PV1:AssignedPatientLocation.PersonLocationType}=""' >
+<true>
+<assign value='"N"' property='target.{PV1:AssignedPatientLocation.PersonLocationType}' action='set' />
+</true>
+<false>
+<assign value='source.{PV1:AssignedPatientLocation.PersonLocationType}' property='target.{PV1:AssignedPatientLocation.PersonLocationType}' action='set' />
+</false>
+</if>
+<assign value='source.{PV1:AttendingDoctor().IDNumber}' property='target.{PV1:AttendingDoctor().IDNumber}' action='set' />
+<assign value='source.{PV1:HospitalService}' property='target.{PV1:HospitalService}' action='set' />
+<assign value='source.{PV1:VisitNumber.IDNumber}' property='target.{PV1:VisitNumber.IdentifierTypeCode}' action='set' />
+<assign value='source.{PV1:FinancialClass()}' property='target.{PV1:FinancialClass()}' action='set' />
+<assign value='source.{PV1:ChargePriceIndicator}' property='target.{PV1:ChargePriceIndicator}' action='set' />
+<assign value='source.{MSH:DateTimeOfMessage}' property='target.{PV1:DischargeDateTime(1)}' action='set' />
+</transform>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="DT.Triaje.TRIA02ToSELR30">
+<Super>Ens.DataTransformDTL</Super>
+<TimeChanged>66170,35316.117357</TimeChanged>
+<TimeCreated>66127,38030.664961</TimeCreated>
+<DependsOn>EnsLib.HL7.Message,MSG.SeleneHL7.Request.ORUR30Request</DependsOn>
+
+<Parameter name="IGNOREMISSINGSOURCE">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REPORTERRORS">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="TREATEMPTYREPEATINGFIELDASNULL">
+<Default>1</Default>
+</Parameter>
+
+<XData name="DTL">
+<XMLNamespace>http://www.intersystems.com/dtl</XMLNamespace>
+<Data><![CDATA[
+<transform sourceClass='EnsLib.HL7.Message' targetClass='MSG.SeleneHL7.Request.ORUR30Request' sourceDocType='Manchester_2.5:ADT_A02' targetDocType='ORU_R30:ORU_R30' create='new' language='objectscript' >
+<assign value='"^~\&amp;amp;"' property='target.MSH.MSH2.content' action='set' />
+<assign value='"WS"' property='target.MSH.MSH3.HD1.content' action='set' />
+<assign value='"HCSC"' property='target.MSH.MSH4.HD1.content' action='set' />
+<assign value='"EXTERNAL"' property='target.MSH.MSH5.HD1.content' action='set' />
+<assign value='"EXTHL7"' property='target.MSH.MSH6.HD1.content' action='set' />
+<assign value='"triage:2lmBhrJL2X9XmrMnEdM+PQ=="' property='target.MSH.MSH8.content' action='set' />
+<assign value='"ORU"' property='target.MSH.MSH9.MSG1.content' action='set' />
+<assign value='"R30"' property='target.MSH.MSH9.MSG2.content' action='set' />
+<assign value='"ORU_R30"' property='target.MSH.MSH9.MSG3.content' action='set' />
+<assign value='"P"' property='target.MSH.MSH11.PT1.content' action='set' />
+<assign value='"2.5"' property='target.MSH.MSH12.VID1.content' action='set' />
+<assign value='"1"' property='target.MSH.MSH13.content' action='set' />
+<assign value='"AL"' property='target.MSH.MSH16.content' action='set' />
+<assign value='"ASCII"' property='target.MSH.MSH18.(1).content' action='set' />
+<assign value='source.{MSH:DateTimeOfMessage}' property='target.MSH.MSH7.TS1.content' action='set' />
+<assign value='source.{MSH:MessageControlID}' property='target.MSH.MSH10.content' action='set' />
+<assign value='"|"' property='target.MSH.MSH1.content' action='set' />
+<assign value='source.{PV1:VisitNumber.IDNumber}' property='target.ORUR30VISIT.PV1.PV119.CX5.content' action='set' />
+<assign value='source.{PID:PatientIdentifierList(1).IDNumber}' property='target.PID.PID3.(1).CX1.content' action='set' />
+<assign value='"3801"' property='target.OBR.OBR4.CE1.content' action='set' />
+<assign value='source.{MSH:DateTimeOfMessage}' property='target.OBR.OBR7.TS1.content' action='set' />
+<assign value='"ST"' property='target.ORUR30OBSERVATION.(1).OBX.OBX2.content' action='set' />
+<assign value='"URGUBICACION"' property='target.ORUR30OBSERVATION.(1).OBX.OBX3.CE1.content' action='set' />
+<assign value='source.{PV1:AssignedPatientLocation.Room}' property='target.ORUR30OBSERVATION.(1).OBX.OBX5.(1).content' action='set' />
+</transform>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="DT.Triaje.TRIR01ToSELR30">
+<Super>Ens.DataTransformDTL</Super>
+<TimeChanged>66411,63099.464354</TimeChanged>
+<TimeCreated>66099,63432.90968</TimeCreated>
+<DependsOn>EnsLib.HL7.Message,MSG.SeleneHL7.Request.ORUR30Request</DependsOn>
+
+<Parameter name="IGNOREMISSINGSOURCE">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REPORTERRORS">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="TREATEMPTYREPEATINGFIELDASNULL">
+<Default>1</Default>
+</Parameter>
+
+<XData name="DTL">
+<XMLNamespace>http://www.intersystems.com/dtl</XMLNamespace>
+<Data><![CDATA[
+<transform sourceClass='EnsLib.HL7.Message' targetClass='MSG.SeleneHL7.Request.ORUR30Request' sourceDocType='Manchester_2.5:ORU_R01' targetDocType='ORU_R30:ORU_R30' create='new' language='objectscript' >
+<assign value='"^~\&amp;amp;"' property='target.MSH.MSH2.content' action='set' />
+<assign value='"WS"' property='target.MSH.MSH3.HD1.content' action='set' />
+<assign value='"HCSC"' property='target.MSH.MSH4.HD1.content' action='set' />
+<assign value='"EXTERNAL"' property='target.MSH.MSH5.HD1.content' action='set' />
+<assign value='"EXTHL7"' property='target.MSH.MSH6.HD1.content' action='set' />
+<assign value='"triage:2lmBhrJL2X9XmrMnEdM+PQ=="' property='target.MSH.MSH8.content' action='set' />
+<assign value='"ORU"' property='target.MSH.MSH9.MSG1.content' action='set' />
+<assign value='"R30"' property='target.MSH.MSH9.MSG2.content' action='set' />
+<assign value='"ORU_R30"' property='target.MSH.MSH9.MSG3.content' action='set' />
+<assign value='"P"' property='target.MSH.MSH11.PT1.content' action='set' />
+<assign value='"2.5"' property='target.MSH.MSH12.VID1.content' action='set' />
+<assign value='"1"' property='target.MSH.MSH13.content' action='set' />
+<assign value='"AL"' property='target.MSH.MSH16.content' action='set' />
+<assign value='"ASCII"' property='target.MSH.MSH18.(1).content' action='set' />
+<assign value='source.{MSH:DateTimeOfMessage}' property='target.MSH.MSH7.TS1.content' action='set' />
+<assign value='source.{MSH:MessageControlID}' property='target.MSH.MSH10.content' action='set' />
+<assign value='"|"' property='target.MSH.MSH1.content' action='set' />
+<assign value='source.{PIDgrpgrp(1).PIDgrp.PID:PatientIdentifierList(1).IDNumber}' property='target.PID.PID3.(1).CX1.content' action='set' />
+<assign value='source.{PIDgrpgrp(1).PIDgrp.PV1grp.PV1:VisitNumber.IDNumber}' property='target.ORUR30VISIT.PV1.PV119.CX5.content' action='set' />
+<assign value='"3801"' property='target.OBR.OBR4.CE1.content' action='set' />
+<assign value='source.{MSH:DateTimeOfMessage}' property='target.OBR.OBR7.TS1.content' action='set' />
+<assign value='1' property='contador' action='set' />
+<foreach property='source.{PIDgrpgrp(1).ORCgrp(1).OBXgrp()}' key='k1' >
+<if condition='..Exists("MANCHESTER_INDICADORES",source.{PIDgrpgrp(1).ORCgrp(1).OBXgrp(k1).OBX:ObservationIdentifier.Identifier})' >
+<true>
+<assign value='..Lookup("MANCHESTER_TIPO_DATO_INDICADOR",source.{PIDgrpgrp(1).ORCgrp(1).OBXgrp(k1).OBX:ObservationIdentifier.Identifier})' property='target.ORUR30OBSERVATION.(contador).OBX.OBX2.content' action='set' />
+<assign value='..Lookup("MANCHESTER_INDICADORES",source.{PIDgrpgrp(1).ORCgrp(1).OBXgrp(k1).OBX:ObservationIdentifier.Identifier})' property='target.ORUR30OBSERVATION.(contador).OBX.OBX3.CE1.content' action='set' />
+<assign value='$REPLACE(source.{PIDgrpgrp(1).ORCgrp(1).OBXgrp(k1).OBX:ObservationValue(1)}, ".0", "")' property='target.ORUR30OBSERVATION.(contador).OBX.OBX5.(1).content' action='set' />
+<assign value='contador + 1' property='contador' action='set' />
+</true>
+</if>
+</foreach>
+<assign value='"ST"' property='target.ORUR30OBSERVATION.(contador).OBX.OBX2.content' action='set' />
+<assign value='"CREADOR_TOMA_MANC"' property='target.ORUR30OBSERVATION.(contador).OBX.OBX3.CE1.content' action='set' />
+<assign value='source.{PIDgrpgrp(1).ORCgrp(1).ORC:VerifiedBy(1).IDNumber}' property='target.ORUR30OBSERVATION.(contador).OBX.OBX5.(1).content' action='set' />
+<assign value='contador + 1' property='contador2' action='set' />
+<assign value='"ST"' property='target.ORUR30OBSERVATION.(contador2).OBX.OBX2.content' action='set' />
+<assign value='"URGGRAVEDAD"' property='target.ORUR30OBSERVATION.(contador2).OBX.OBX3.CE1.content' action='set' />
+<assign value='..Lookup("MANCHESTER_GRAVEDAD",source.{PIDgrpgrp(1).ORCgrp(1).OBR:QuantityTiming(1).Priority})' property='target.ORUR30OBSERVATION.(contador2).OBX.OBX5.(1).content' action='set' />
+</transform>
+]]></Data>
+</XData>
+</Class>
+
+
+</Export>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="IRIS" version="26" zv="IRIS for UNIX (Red Hat Enterprise Linux for x86-64) 2020.1 (Build 215_0_20690U)" ts="2022-11-28 08:47:34">
+<Class name="UTIL.Triaje.Funciones">
+<Super>Ens.Rule.FunctionSet</Super>
+<TimeChanged>66420,34950.310501</TimeChanged>
+<TimeCreated>66070,62666.511751</TimeCreated>
+
+<Method name="esMayorDe16">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>fechaNacimiento:%String</FormalSpec>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+ //Fecha de nacimiento viene en formato YYYYMMDD
+ set fechaNac = $EXTRACT(fechaNacimiento, 1, 4)_"-"_ $EXTRACT(fechaNacimiento, 5, 6)_"-"_ $EXTRACT(fechaNacimiento, 7, 8)
+ $$$LOGINFO(fechaNac)
+ set fechaActual = $ZDATE($NOW(), 3)
+ set diferencia = ##class(%SYSTEM.SQL).DATEDIFF("dd", fechaNac, fechaActual)
+ if diferencia >= 5840{
+	 quit 1
+ }
+ quit 0
+]]></Implementation>
+</Method>
+</Class>
+
+
+</Export>

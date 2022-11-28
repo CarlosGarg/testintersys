@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="IRIS" version="26" zv="IRIS for UNIX (Red Hat Enterprise Linux for x86-64) 2020.1 (Build 215_0_20690U)" ts="2022-11-28 08:47:30">
+<Class name="RT.Triaje.SELToTRI">
+<Description>
+</Description>
+<Super>Ens.Rule.Definition</Super>
+<TimeChanged>66128,63376.898106</TimeChanged>
+<TimeCreated>66056,62398.820142</TimeCreated>
+
+<Parameter name="RuleAssistClass">
+<Default>EnsLib.HL7.MsgRouter.RuleAssist</Default>
+</Parameter>
+
+<XData name="RuleDefinition">
+<XMLNamespace>http://www.intersystems.com/rule</XMLNamespace>
+<Data><![CDATA[
+<ruleDefinition alias="" context="EnsLib.HL7.MsgRouter.RoutingEngine" production="es.cgm.HCSCProduction">
+<ruleSet name="" effectiveBegin="" effectiveEnd="">
+<rule name="" disabled="false">
+<constraint name="docCategory" value="SELENE-SP16_2.5"></constraint>
+<constraint name="docName" value="ADT_A01"></constraint>
+<when condition="(HL7.{PV1:2}=&quot;U&quot;)&amp;&amp;esMayorDe16(HL7.{PID:7})">
+<send transform="DT.Triaje.SELA01ToTRIA04" target="TRI_OUTIP"></send>
+<return></return>
+</when>
+</rule>
+<rule name="" disabled="false">
+<constraint name="docCategory" value="SELENE-SP16_2.5"></constraint>
+<constraint name="docName" value="ADT_A03"></constraint>
+<when condition="(HL7.{PV1:2}=&quot;U&quot;)&amp;&amp;esMayorDe16(HL7.{PID:7})">
+<send transform="DT.Triaje.SELA03ToTRIA03" target="TRI_OUTIP"></send>
+<return></return>
+</when>
+</rule>
+<rule name="" disabled="false">
+<constraint name="docCategory" value="SELENE-SP16_2.5"></constraint>
+<constraint name="docName" value="ADT_A11"></constraint>
+<when condition="(HL7.{PV1:2}=&quot;U&quot;)&amp;&amp;esMayorDe16(HL7.{PID:7})">
+<send transform="DT.Triaje.SELA11ToTRIA11" target="TRI_OUTIP"></send>
+<return></return>
+</when>
+</rule>
+<rule name="" disabled="false">
+<constraint name="docCategory" value="SELENE-SP16_2.5"></constraint>
+<constraint name="docName" value="ADT_A13"></constraint>
+<when condition="(HL7.{PV1:2}=&quot;U&quot;)&amp;&amp;esMayorDe16(HL7.{PID:7})">
+<send transform="DT.Triaje.SELA13ToTRIA13" target="TRI_OUTIP"></send>
+<return></return>
+</when>
+</rule>
+<rule name="" disabled="false">
+<constraint name="docCategory" value="SELENE-SP16_2.5"></constraint>
+<constraint name="docName" value="ADT_A31"></constraint>
+<when condition="(HL7.{PV1:2}=&quot;U&quot;)&amp;&amp;esMayorDe16(HL7.{PID:7})">
+<send transform="DT.Triaje.SELA31ToTRIA31" target="TRI_OUTIP"></send>
+<return></return>
+</when>
+</rule>
+<rule name="" disabled="false">
+<constraint name="docCategory" value="SELENE-SP16_2.5"></constraint>
+<constraint name="docName" value="ADT_A34"></constraint>
+<when condition="1">
+<send transform="DT.Triaje.SELA34ToTRIA40" target="TRI_OUTIP"></send>
+<return></return>
+</when>
+</rule>
+</ruleSet>
+</ruleDefinition>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="RT.Triaje.TRIToSEL">
+<Description>
+</Description>
+<Super>Ens.Rule.Definition</Super>
+<TimeChanged>66330,42996.113082</TimeChanged>
+<TimeCreated>66091,44370.481059</TimeCreated>
+
+<Parameter name="RuleAssistClass">
+<Default>EnsLib.HL7.MsgRouter.RuleAssist</Default>
+</Parameter>
+
+<XData name="RuleDefinition">
+<XMLNamespace>http://www.intersystems.com/rule</XMLNamespace>
+<Data><![CDATA[
+<ruleDefinition alias="" context="EnsLib.HL7.MsgRouter.RoutingEngine" production="es.cgm.HCSCProduction">
+<ruleSet name="" effectiveBegin="" effectiveEnd="">
+<rule name="">
+<constraint name="docCategory" value="Manchester_2.5"></constraint>
+<constraint name="docName" value="ADT_A02"></constraint>
+<when condition="1">
+<send transform="DT.Triaje.TRIA02ToSELR30" target="SEL_OUTHTTP"></send>
+<send transform="DT.Triaje.TRIA02ToSELA02" target="SEL_OUTIP"></send>
+<return></return>
+</when>
+</rule>
+<rule name="" disabled="false">
+<constraint name="docCategory" value="Manchester_2.5"></constraint>
+<constraint name="docName" value="ORU_R01"></constraint>
+<when condition="1">
+<send transform="DT.Triaje.TRIR01ToSELR30" target="SEL_OUTHTTP"></send>
+<return></return>
+</when>
+</rule>
+</ruleSet>
+</ruleDefinition>
+]]></Data>
+</XData>
+</Class>
+
+
+</Export>
